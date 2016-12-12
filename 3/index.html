@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta itemprop="name" content="老虎机"/>
+	<!-- <meta itemprop="image" content="images/Icon@2x.png" /> -->
+ 	<meta name="description" itemprop="description" content="老虎机" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	<meta charset="utf-8">
+	<title>老虎机</title>
+	<link type="text/css" rel="stylesheet"  href="./css/style.css" source="widget"/>
+	<style>
+		.c1 li,
+		.c2 li,
+		.c3 li{
+			position: absolute;
+		}
+
+		.c1 li img,
+		.c2 li img,
+		.c3 li img{
+			position: relative;
+		}
+	</style>
+</head>
+<body>
+<div class="wrap">
+	<div class="main">
+		<p class="result"><!--很遗憾，您未中奖--></p>
+		<div class="panel">
+			<ul class="light">
+				<li>·</li>
+				<li>·</li>
+				<li>·</li>
+				<li>·</li>
+				<li>·</li>
+				<li>·</li>
+				<li>·</li>
+				<li>·</li>
+				<li>·</li>
+				<li>·</li>
+				<li>·</li>
+				<li>·</li>
+				<li>·</li>
+			</ul>
+			<div class="panelm">
+				<div class="c1">
+					<ul class="c1ul">
+						<li><img src="i/1.jpg" alt=""></li>
+						<li ><img src="i/2.jpg" alt="" style="transform: translate3d(0,128px,0)"></li>
+						<li ><img src="i/3.png" alt="" style="transform: translate3d(0,-128px,0)"></li>
+					</ul>
+				</div>
+				<div class="c2">
+					<ul class="c2ul">
+						<li ><img src="i/1.jpg" alt="" style="transform: translate3d(0,-128px,0)"></li>
+						<li><img src="i/2.jpg" alt=""></li>
+						<li><img src="i/3.png" alt=""  style="transform: translate3d(0,128px,0)"></li>
+					</ul>
+				</div>
+				<div class="c3">
+					<ul class="c3ul">
+						<li><img src="i/1.jpg" alt=""  style="transform: translate3d(0,128px,0)"></li>
+						<li><img src="i/2.jpg" alt=""  style="transform: translate3d(0,-128px,0)"></li>
+						<li><img src="i/3.png" alt=""></li>
+					</ul>
+				</div>
+			</div>
+			<ul class="light light2">
+				<li>·</li>
+				<li>·</li>
+				<li>·</li>
+				<li>·</li>
+				<li>·</li>
+				<li>·</li>
+				<li>·</li>
+				<li>·</li>
+				<li>·</li>
+				<li>·</li>
+				<li>·</li>
+				<li>·</li>
+				<li>·</li>
+			</ul>
+			<span class="btn">立即摇奖</span>
+		</div>
+	</div>
+	<div class="tipsw">
+		<div class="tips">点击按钮，开始摇奖~</div>
+	</div>
+</div>
+
+<script>
+setTimeout(fnResize,100);
+window.addEventListener("resize", function() {
+  fnResize()
+}, false);
+function fnResize(){
+  var docWidth = document.documentElement.clientWidth,
+          body = document.getElementsByTagName('html')[0];
+  if(docWidth > 480){
+    docWidth = 480;
+    document.querySelector('.wrap').style.width = '480px';
+  } else {
+    document.querySelector('.wrap').style.width = '';
+  }
+  body.style.fontSize = docWidth / 10 + 'px';
+}
+</script>
+<script src="./js/index.js"></script>
+</body>
+</html>

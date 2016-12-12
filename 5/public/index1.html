@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	<title>Document</title>
+	<link rel="stylesheet" href="style1/style.css">
+	<link rel="stylesheet" href="style1/base.css">
+	<script src="zepto.js"></script>
+	<style type="text/css">
+		body {
+			-webkit-user-select: none;
+		}
+	</style>
+</head>
+<body  onselectstart="return false">
+	<div class="content">
+		<div class="scratch_area">
+			<div class="cont" id="cont">
+				<img src="images1/prize.png" alt="" class="prize">
+				<img src="images1/scratch.png" alt="" class="scratch" style="visibility: hidden" id="scratch">
+			</div>
+			<button class="btn">再玩一次</button>
+		</div>
+		<p class="number">剩余刮奖次数：<em>5</em></p>
+	</div>
+</body>
+</html>
+<script type="text/javascript">
+document.querySelector('body').addEventListener('touchstart', function (event) {
+    event.preventDefault();
+});
+
+
+	window.addEventListener("resize", function() {
+		fnResize()
+	}, false);
+	function fnResize(){
+		var docWidth = document.documentElement.clientWidth,
+				body = document.getElementsByTagName('html')[0];
+		if(docWidth > 480){
+			docWidth = 480;
+			document.querySelector('.content').style.width = '480px';
+		} else {
+			document.querySelector('.content').style.width = '';
+		}
+		body.style.fontSize = docWidth / 10 + 'px';
+	}
+	fnResize();
+
+
+
+     var canvas,
+             ctx,
+		imageData;
+     var scratch = document.getElementById('scratch');
+     var cont = document.getElementById('cont');
+	 var initCanvas = function(){
+		 canvas = document.createElement('canvas');
+
+		 canvas.width = 560;
+		 canvas.height = 334;
+		 ctx = canvas.getContext('2d');
+		$(canvas).css({
+					"position":"absolute",
+					"margin-left":"-50%",
+					"width":$(".prize").width(),
+					"height":$(".prize").height()
+				});
+		
+		var image = new Image();
+		image.src = "images1/scratch.png";
+
+		image.onload = function(){
+			ctx.drawImage(scratch,0,0,560,334,0,0,560,334);
+			imageData = ctx.getImageData(0,0,canvas.width,canvas.height);//保存当前canvas画面 重置的时候复原
+			cont.appendChild(canvas);
+		}
+
+
+		 //移动端的处理
+		 canvas.addEventListener('touchstart', eventDown,false);
+		 canvas.addEventListener('touchend', eventUp,false);
+		 canvas.addEventListener('touchmove', eventMove,false);
+
+	 }
+
+    initCanvas();
+
+
+	 function eventDown(e){
+		 e.preventDefault();
+		 ismousedown=true;
+	 }
+
+
+	var total = 5;
+	var isOld = false;
+
+	 function eventUp(e){
+		 e.preventDefault();
+		 var nowNum = 0;
+		 //获取canvas图片数据
+		 var a = ctx.getImageData(0, 0, canvas.width, canvas.height)['data'];
+		 var len = a.length;
+		 for(var i=3;i<len;i+=4){
+			 if(a[i] == 0){
+				 nowNum ++;
+			 }
+		 }
+
+		 if(nowNum >= (len/8)){
+			 if(!isOld){
+				 isOld = true;
+				 
+			 }
+		 }
+		 ismousedown=false;
+		 var base64image = canvas.toDataURL();
+		 //console.log(base64image);
+	 }
+
+
+	 //鼠标移动 和 触摸移动
+	 function eventMove(e){
+		 e.preventDefault();
+		//console.log(canvas.clientLeft);
+         console.log(e,cont.offsetLeft);
+		 var x = e.changedTouches[0].pageX -cont.offsetLeft;
+		 var y = e.changedTouches[0].pageY -cont.offsetTop;
+
+		 var X = x*canvas.width/$(canvas).width();
+		 var Y = y*canvas.height/$(canvas).height();
+		 if(ismousedown) {
+			 ctx.globalCompositeOperation = "destination-out";
+			 ctx.beginPath();
+             var fontem = parseInt(window.getComputedStyle(document.documentElement, null)["font-size"]);
+			 ctx.arc(X, Y, fontem*1.5, 0, Math.PI * 2,true);
+			 ctx.fill();
+		 }
+	 }
+	
+	changePrize()
+	function changePrize(){
+		var imageArray = ["images1/prize.png","images1/prize1.png","images1/prize2.png"];
+		var randomNum = parseInt(Math.random()*1000)+1;
+		var index ;
+		if(randomNum<700){
+			index = 2;
+		}else if(randomNum < 900){
+			index = 0;
+		}else {
+			index = 1;
+		}
+
+		$(".prize").attr("src",imageArray[index]);
+	}
+
+
+
+	$('.btn').on('touchstart',function(){
+		if(total == 0){
+			alert("抽奖次数为0");
+			return ;
+		}
+		if(isOld){
+			isOld = false;
+			$(".number em").text(--total);
+			$.ajax();//更改中奖图片
+			changePrize();
+			ctx.putImageData(imageData,0,0); //复原涂层
+		}else{
+			alert('能不能刮干净点')
+		}
+	})
+</script>

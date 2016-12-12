@@ -1,0 +1,73 @@
+html {
+  font-size: 64px;
+  width: 100%;
+  height: 100%; }
+
+body {
+  background: #000;
+  width: 100%;
+  height: 100%; }
+
+.content{
+  width: 10.0rem;
+  height: 100%;
+  background-color: #bc001f;
+  padding-top: 0.34375rem;
+  margin: 0 auto;
+}
+.scratch_area {
+  background: url(i/bg.png) 0 0 no-repeat;
+  background-size: 100%;
+  width: 9.40625rem;
+  height: 7.8125rem;
+  margin: 0 auto;
+  text-align: center;
+  overflow: hidden;
+  margin-bottom: 0.25rem;
+}
+  .scratch_area .cont{
+    position: relative;
+    width: 8.75rem;
+    height: 5.21875rem;
+    margin: 0 auto;
+    padding: 0.328125rem 0;
+  }
+  .scratch_area .btn{
+    width: 8.75rem;
+    height: 1.375rem;
+    background-color: #26d1bf;
+    font-size: 0.625rem;
+    color: #fff;
+    font-weight: bold;
+    border: none;
+    border-radius: 0.125rem;
+  }
+  .scratch_area .prize{
+    width: 8.75rem;
+    height: 5.21875rem;
+    position: absolute;
+    left: 50%;
+    -webkit-transform:translate(-50%);
+    transform:translate(-50%);
+  }
+   .scratch_area .scratch{
+    width: 8.75rem;
+    height: 5.21875rem;
+    position: absolute;
+    left: 50%;
+    -webkit-transform:translate(-50%);
+    transform:translate(-50%);
+  }
+  .content .number{
+    padding: 0.015625rem 0.25rem;
+    background-color: #9e1128;
+    line-height: 0.5625rem;
+    text-align: center;
+    color: #fff;
+    font-size: 0.375rem;
+    border-radius: 1.625rem;
+    position: absolute;
+    left: 50%;
+    -webkit-transform:translate(-50%);
+    transform:translate(-50%);
+  }

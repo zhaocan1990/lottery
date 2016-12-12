@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript" src="../js/zepto.min.js"></script>
+	<script type="text/javascript">
+		setTimeout(fnResize,100);
+		window.addEventListener("resize", function() {
+		    fnResize()
+		}, false);
+		function fnResize(){
+		    var docWidth = document.documentElement.clientWidth,
+		            body = document.getElementsByTagName('html')[0];
+		    if(docWidth > 480){
+		      docWidth = 480;
+		      document.querySelector('.content').style.width = '480px';
+		    } else {
+		      document.querySelector('.content').style.width = '';
+		    }
+		    body.style.fontSize = docWidth / 10 + 'px';
+		}
+
+	</script>
+<link type="text/css" rel="stylesheet"  href="../css/widget.css" source="widget"/>
+</head>
+<body>
+
+
+<div class="content">
+	<div class="red_packetswrap">
+		<img src="images/red_packetsbg.png" alt="" class="red_packetsbg">
+		<div class="seal_open">
+			<img src="images/seal.png" alt="" class="seal">
+			<img src="images/open_packetsbg.png" alt="" class="open_packetsbg">
+		</div>
+		<img src="images/shadow.png" alt="" class="pack_shadow">
+		<img src="images/btn.png" alt="" class="btn">
+		<p class="text">点击按钮，收取红包~</p>
+		<p class="textopen">已存入零钱，可直接转账</p>
+		<i class="shadow"></i>
+		<img src="images/money_top.png" alt="" class="money_top">
+		<img src="images/money_bottom.png" alt="" class="money_bottom">
+		<p class="money"><em>66.60</em>元</p>
+		<span class="btnf">再来一次</span>
+	</div>
+</div>
+	<script>
+			var arrText = ["很遗憾，未抽中","6.66","8.88","66.60","88.88","188.88"];
+			var totalNum = 3;
+			$('.btnf').on("tap",function(){
+				/*if(totalNum<=0){
+					alert("三次抽奖机会已经用尽");
+					return false;
+				}else{
+					$(".red_packetswrap").removeClass("open");
+				}*/
+				$(".red_packetswrap").removeClass("open");
+			})
+
+			$('.btn').on("tap",function(){
+				var randomNum = parseInt(Math.random() * 1000 +1);
+				console.log(randomNum)
+				totalNum--;
+
+				var index ;
+
+				if(randomNum>=0 && randomNum<=499){
+
+					$(".money").html("<br>很遗憾，未抽中");
+					$(".textopen").hide();
+					$(".red_packetswrap").addClass("open");
+					return false;
+				}else if(randomNum>=500 && randomNum<=599){
+
+					index = 1;
+
+				}else if(randomNum>=600 && randomNum<=699){
+
+					index = 2;
+
+				}else if(randomNum>=700 && randomNum<=799){
+
+					index = 3;
+
+				}else if(randomNum>=800 && randomNum<=949){
+
+					index = 4;
+
+				}else if(randomNum>=950 && randomNum<=1000){
+
+					index = 5;
+
+				}
+				console.log(index)
+				console.log(arrText[index]);
+				$(".money").html("<em>"+arrText[index]+"</em>元")
+				$(".textopen").show();
+				$(".red_packetswrap").addClass("open");
+			})
+
+	</script>
+
+</body>
+</html>
